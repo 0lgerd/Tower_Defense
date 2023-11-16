@@ -4,18 +4,34 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    public string leveLoad = "Level";
+    public string levelLoad = "Level";
 
     public SceneFader sceneFader;
-    
+
+    // Fade to the specified level
     public void Play()
     {
-        sceneFader.FadeTo(leveLoad);
+        try
+        {
+            sceneFader.FadeTo(levelLoad);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in Play(): {ex.Message}");
+        }
     }
 
+    // Quit the application
     public void Quit()
     {
-        Debug.Log("Exitiing..");
-        Application.Quit();
+        try
+        {
+            Debug.Log("Exiting...");
+            Application.Quit();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in Quit(): {ex.Message}");
+        }
     }
 }

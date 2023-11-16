@@ -10,24 +10,55 @@ public class Shop : MonoBehaviour
 
     BuildManager buildManager;
 
+    // Initialize BuildManager on start
     void Start()
     {
-        buildManager = BuildManager.instance;
+        try
+        {
+            buildManager = BuildManager.instance;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in Start(): {ex.Message}");
+        }
     }
 
+    // Select the standard turret for building
     public void SelectStandartTurrel()
     {
-        buildManager.SelectToBuild(standartTurret);
+        try
+        {
+            buildManager.SelectToBuild(standartTurret);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in SelectStandartTurrel(): {ex.Message}");
+        }
     }
+
+    // Select the missile launcher for building
     public void SelectMissileLauncehr()
     {
-        buildManager.SelectToBuild(missileLauncher);
+        try
+        {
+            buildManager.SelectToBuild(missileLauncher);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in SelectMissileLauncehr(): {ex.Message}");
+        }
     }
 
+    // Select the laser for building
     public void SelectLaser()
     {
-        buildManager.SelectToBuild(Laser);
+        try
+        {
+            buildManager.SelectToBuild(Laser);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in SelectLaser(): {ex.Message}");
+        }
     }
-
-
 }

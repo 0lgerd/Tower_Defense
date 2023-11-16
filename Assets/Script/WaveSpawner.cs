@@ -6,9 +6,8 @@ using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
-
     public static int EnemiseAlive = 0;
-    
+
     public Wave[] waves;
 
     public Transform spawnPoint;
@@ -23,28 +22,36 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
-        if (EnemiseAlive > 0)
+        try
         {
-            return;
-        }
-        
-        if (waveNumber == waves.Length)
-        {
-            gameManager.WinLevel();
-            this.enabled = false;
-        }
-        
-        if (countdown <= 0f)
-        {
-            StartCoroutine(SpawnWave());
-            countdown = timeBetweenWaves;
-            return;
-        }
-        countdown -= Time.deltaTime;
+            if (EnemiseAlive > 0)
+            {
+                return;
+            }
 
-        countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
+            if (waveNumber == waves.Length)
+            {
+                gameManager.WinLevel();
+                this.enabled = false;
+            }
 
-        waveCountdownText.text = string.Format("{0:00.00}", countdown);
+            if (countdown <= 0f)
+            {
+                StartCoroutine(SpawnWave());
+                countdown = timeBetweenWaves;
+                return;
+            }
+
+            countdown -= Time.deltaTime;
+
+            countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
+
+            waveCountdownText.text = string.Format("{0:00.00}", countdown);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error in WaveSpawner Update(): {ex.Message}");
+        }
     }
 
     IEnumerator SpawnWave()
@@ -62,7 +69,6 @@ public class WaveSpawner : MonoBehaviour
 
         waveNumber++;
 
-        
     }
 
     void SpawnEnemy(GameObject enemy)

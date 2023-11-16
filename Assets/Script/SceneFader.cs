@@ -7,17 +7,27 @@ using UnityEngine;
 public class SceneFader : MonoBehaviour
 {
     public Image img;
-    public AnimationCurve fadeCurve; 
-    
+    public AnimationCurve fadeCurve;
+
+    // Start the fade-in effect on scene start
     private void Start()
     {
-        StartCoroutine(FadeIn());
+        try
+        {
+            StartCoroutine(FadeIn());
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in Start(): {ex.Message}");
+        }
     }
 
+    // Coroutine for fading in
     IEnumerator FadeIn()
     {
         float time = 1f;
 
+        // Gradually decrease alpha value for fade-in effect
         while (time > 0f)
         {
             time -= Time.deltaTime;
@@ -27,15 +37,25 @@ public class SceneFader : MonoBehaviour
         }
     }
 
+    // Trigger the fade-out effect and load the specified scene
     public void FadeTo(string scene)
     {
-        StartCoroutine(FadeOut(scene));
+        try
+        {
+            StartCoroutine(FadeOut(scene));
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in FadeTo(): {ex.Message}");
+        }
     }
-    
+
+    // Coroutine for fading out
     IEnumerator FadeOut(string scene)
     {
         float time = 0f;
 
+        // Gradually increase alpha value for fade-out effect
         while (time < 1f)
         {
             time += Time.deltaTime;
@@ -44,6 +64,8 @@ public class SceneFader : MonoBehaviour
             yield return 0;
         }
 
+        // Load the specified scene
         SceneManager.LoadScene(scene);
+
     }
 }

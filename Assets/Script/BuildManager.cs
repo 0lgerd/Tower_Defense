@@ -16,52 +16,134 @@ public class BuildManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance != null)
+        try
         {
-            return;
-        }
+            // Check if an instance already exists
+            if (instance != null)
+            {
+                return;
+            }
 
-        instance = this;
+            instance = this;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in Awake(): {ex.Message}");
+        }
     }
 
-    public bool CanBuild { get { return turretToBuild != null; } }
-    public bool HasMoney { get { return PlayerStats.Money >= turretToBuild.cost; } }
+    // Check if a turret can be built
+    public bool CanBuild 
+    { 
+        get 
+        {
+            try
+            {
+                return turretToBuild != null;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"Error in CanBuild property: {ex.Message}");
+                return false;
+            }
+        } 
+    }
+    
+    // Check if the player has enough money to build the selected turret
+    public bool HasMoney 
+    { 
+        get 
+        {
+            try
+            {
+                return PlayerStats.Money >= turretToBuild.cost;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"Error in HasMoney property: {ex.Message}");
+                return false;
+            }
+        } 
+    }
 
+    // Set the turret to build
     public void SetTurretToBuild(TurretBluePrint turretBlueprint)
     {
-        turretToBuild = turretBlueprint;
+        try
+        {
+            turretToBuild = turretBlueprint;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in SetTurretToBuild(): {ex.Message}");
+        }
     }
 
+    // Select a node for building or interaction
     public void SelectNode (Node node)
     {
-        if(selectedNode == node)
+        try
         {
-            DeselectNode();
-            return;
+            // Deselect if the same node is clicked again
+            if(selectedNode == node)
+            {
+                DeselectNode();
+                return;
+            }
+
+            selectedNode = node;
+            turretToBuild = null;
+
+            // Set the target for the Node UI
+            nodeUI.SetTarget(node);
         }
-
-        selectedNode = node;
-        turretToBuild = null;
-
-        nodeUI.SetTarget(node);
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in SelectNode(): {ex.Message}");
+        }
     }
 
+    // Deselect the currently selected node
     public void DeselectNode()
     {
-        selectedNode = null;
-        nodeUI.Hide();
+        try
+        {
+            selectedNode = null;
+            nodeUI.Hide();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in DeselectNode(): {ex.Message}");
+        }
     }
 
+    // Select a turret to build
     public void SelectToBuild(TurretBluePrint turretBlueprint)
     {
-        turretToBuild = turretBlueprint;
-        
-        DeselectNode();
+        try
+        {
+            turretToBuild = turretBlueprint;
+            
+            // Deselect the current node
+            DeselectNode();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in SelectToBuild(): {ex.Message}");
+        }
     }
 
+    // Get the turret to build
     public TurretBluePrint GetTurretToBuild()
     {
-        return turretToBuild;
+        try
+        {
+            return turretToBuild;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in GetTurretToBuild(): {ex.Message}");
+            return null;
+        }
     }
 }
-

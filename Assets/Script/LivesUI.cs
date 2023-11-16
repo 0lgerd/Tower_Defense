@@ -9,6 +9,14 @@ public class LivesUI : MonoBehaviour
 
     void Update()
     {
-        livesText.text = PlayerStats.Lives + "Lives";
+        try
+        {
+            // Update the lives text based on the player's remaining lives
+            livesText.text = PlayerStats.Lives + " Lives";
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in Update(): {ex.Message}");
+        }
     }
 }

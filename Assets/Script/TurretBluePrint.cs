@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-
 public class TurretBluePrint
-{ 
+{
     public GameObject prefab;
     public int cost;
 
@@ -14,6 +13,14 @@ public class TurretBluePrint
 
     public int GetSellAmount()
     {
-        return cost/2;
+        try
+        {
+            return cost / 2;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in GetSellAmount(): {ex.Message}");
+            return 0;
+        }
     }
 }

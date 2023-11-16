@@ -9,45 +9,81 @@ public class NodeUI : MonoBehaviour
     public Text upgradeCost;
     public Button upgradeButton;
     public Text sellAmount;
+
     private Node target;
 
-    public void SetTarget (Node _target)
+    // Set the UI target and display relevant information
+    public void SetTarget(Node _target)
     {
-       target = _target;
-       
-       transform.position = target.GetBuildPosition();
+        try
+        {
+            target = _target;
 
-       if (!target.isUpgraded)
-       {
-         upgradeCost.text = "$" + target.turretBlueprint.upgradeCost;
-         upgradeButton.interactable = true;
-       }
-       else
-       {
-         upgradeCost.text = "Done";
-         upgradeButton.interactable = false;
-       }
+            // Position the UI above the node
+            transform.position = target.GetBuildPosition();
 
-       sellAmount.text = "$" + target.turretBlueprint.GetSellAmount();
+            // Display upgrade cost and button state
+            if (!target.isUpgraded)
+            {
+                upgradeCost.text = "$" + target.turretBlueprint.upgradeCost;
+                upgradeButton.interactable = true;
+            }
+            else
+            {
+                upgradeCost.text = "Done";
+                upgradeButton.interactable = false;
+            }
 
-       ui.SetActive(true);
+            // Display sell amount
+            sellAmount.text = "$" + target.turretBlueprint.GetSellAmount();
+
+            // Activate the UI
+            ui.SetActive(true);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in SetTarget(): {ex.Message}");
+        }
     }
 
+    // Hide the UI
     public void Hide()
     {
-       ui.SetActive(false);
+        try
+        {
+            ui.SetActive(false);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in Hide(): {ex.Message}");
+        }
     }
 
+    // Upgrade the turret and deselect the node
     public void Upgrade()
     {
-      target.UpgradeTurret();
-      BuildManager.instance.DeselectNode();
+        try
+        {
+            target.UpgradeTurret();
+            BuildManager.instance.DeselectNode();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in Upgrade(): {ex.Message}");
+        }
     }
 
+    // Sell the turret and deselect the node
     public void Sell()
     {
-      target.SellTurret();
-      BuildManager.instance.DeselectNode();
+        try
+        {
+            target.SellTurret();
+            BuildManager.instance.DeselectNode();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error in Sell(): {ex.Message}");
+        }
     }
-
 }
