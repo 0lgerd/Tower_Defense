@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
+using System.IO;
+using System.Text.Json;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,6 +13,8 @@ public class Enemy : MonoBehaviour
     public float startHealth = 100;
     private float health;
     public int worth = 50;
+
+    public int counter=0;
 
     public GameObject death;
 
@@ -85,5 +90,17 @@ public class Enemy : MonoBehaviour
 
         Destroy(gameObject);
 
+        if(isDead = true;)
+        {
+           counter++;
+        }
+
     }
+
+    string jsonString = JsonSerializer.Serialize(counter, new JsonSerializerOptions)
+        {
+            WriteIndented = true 
+        });
+
+    File.WriteAllText("data.json", jsonString);
 }
