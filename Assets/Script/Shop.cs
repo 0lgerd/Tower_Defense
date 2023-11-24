@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.IO;
 using System.Text.Json;
+using Newtonsoft.Json;
 
 public class Shop : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class Shop : MonoBehaviour
         try
         {
             buildManager.SelectToBuild(standartTurret);
-            counter_weapon=+turretToBuild.cost;
+            counter_weapon = +buildManager._turretToBuild;
             count_weapon++;
         }
         catch (System.Exception ex)
@@ -50,7 +51,7 @@ public class Shop : MonoBehaviour
         try
         {
             buildManager.SelectToBuild(missileLauncher);
-            counter_weapon=+turretToBuild.cost;
+            counter_weapon=+ buildManager._turretToBuild;
             count_weapon++;
         }
         catch (System.Exception ex)
@@ -65,7 +66,7 @@ public class Shop : MonoBehaviour
         try
         {
             buildManager.SelectToBuild(Laser);
-            counter_weapon=+turretToBuild.cost;
+            counter_weapon=+ buildManager._turretToBuild;
             count_weapon++;
 
         }
@@ -75,17 +76,16 @@ public class Shop : MonoBehaviour
         }
     }
 
-    string jsonString = JsonSerializer.Serialize(counter_weapon, new JsonSerializerOptions)
+    
+
+        public void Save()
         {
-            WriteIndented = true 
-        });
+            string jsonString = JsonConvert.SerializeObject(counter_weapon);
 
-        File.WriteAllText("data.json", jsonString);
+            File.WriteAllText("data.json", jsonString);
 
-         string jsonString2 = JsonSerializer.Serialize(count_weapon, new JsonSerializerOptions)
-        {
-            WriteIndented = true 
-        });
+            string jsonString2 = JsonConvert.SerializeObject(count_weapon);
 
-        File.WriteAllText("data.json", jsonString2);
+            File.WriteAllText("data.json", jsonString2);
+        }
 }
