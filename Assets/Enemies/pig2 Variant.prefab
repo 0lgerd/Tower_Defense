@@ -9,7 +9,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1511103030055003737, guid: f90bf15879bc3c2419ca20d84a4864c2, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d6cdd02dff711374f871f644ce48b9cb, type: 2}
     - target: {fileID: 5865485345899676052, guid: f90bf15879bc3c2419ca20d84a4864c2, type: 3}
@@ -55,6 +55,10 @@ PrefabInstance:
     - target: {fileID: 6938032160698060482, guid: f90bf15879bc3c2419ca20d84a4864c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476659281545332424, guid: f90bf15879bc3c2419ca20d84a4864c2, type: 3}
+      propertyPath: healthBar
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7711015582024635512, guid: f90bf15879bc3c2419ca20d84a4864c2, type: 3}
       propertyPath: m_Name

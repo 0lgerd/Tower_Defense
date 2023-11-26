@@ -39,10 +39,9 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5054683306768381777}
-  m_Enabled: 1
-  serializedVersion: 10
+  m_Enabled: 0
+  serializedVersion: 11
   m_Type: 2
-  m_Shape: 0
   m_Color: {r: 0.49345335, g: 0.9528302, b: 0.4539427, a: 1}
   m_Intensity: 3
   m_Range: 10

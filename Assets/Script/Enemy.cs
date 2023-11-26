@@ -3,7 +3,9 @@ using UnityEngine.UI;
 using System;
 using System.IO;
 using System.Text.Json;
+using Newtonsoft.Json;
 
+[Serializable]
 public class Enemy : MonoBehaviour
 {
     public float startSpeed = 10f;
@@ -90,17 +92,18 @@ public class Enemy : MonoBehaviour
 
         Destroy(gameObject);
 
-        if(isDead = true;)
+        if(isDead = true)
         {
            counter++;
         }
-
+        
+        
     }
 
-    string jsonString = JsonSerializer.Serialize(counter, new JsonSerializerOptions)
-        {
-            WriteIndented = true 
-        });
+    public void Save()
+    {
+        string jsonToString = JsonConvert.SerializeObject(counter);
+        File.WriteAllText("data.json", jsonToString);
+    }
 
-    File.WriteAllText("data.json", jsonString);
 }
