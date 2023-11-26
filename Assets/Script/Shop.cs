@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.IO;
+using System.Text.Json;
+using Newtonsoft.Json;
 
 public class Shop : MonoBehaviour
 {
@@ -9,6 +13,9 @@ public class Shop : MonoBehaviour
     public TurretBluePrint Laser;
 
     BuildManager buildManager;
+
+    public int counter_weapon;
+    public int count_weapon;
 
     // Initialize BuildManager on start
     void Start()
@@ -29,6 +36,8 @@ public class Shop : MonoBehaviour
         try
         {
             buildManager.SelectToBuild(standartTurret);
+            counter_weapon = +buildManager._turretToBuild;
+            count_weapon++;
         }
         catch (System.Exception ex)
         {
@@ -42,6 +51,8 @@ public class Shop : MonoBehaviour
         try
         {
             buildManager.SelectToBuild(missileLauncher);
+            counter_weapon=+ buildManager._turretToBuild;
+            count_weapon++;
         }
         catch (System.Exception ex)
         {
@@ -55,10 +66,38 @@ public class Shop : MonoBehaviour
         try
         {
             buildManager.SelectToBuild(Laser);
+            counter_weapon=+ buildManager._turretToBuild;
+            count_weapon++;
+
         }
         catch (System.Exception ex)
         {
             Debug.LogError($"Error in SelectLaser(): {ex.Message}");
         }
     }
+
+    
+
+        public void Save()
+{
+    try
+    {
+        Dictionary<string, int> data = new Dictionary<string, int>
+        {
+            { "counter_weapon", counter_weapon },
+            { "count_weapon", count_weapon }
+        };
+
+        string jsonString = JsonConvert.SerializeObject(data);
+
+        File.WriteAllText("data.json", jsonString);
+
+        Debug.Log("Data saved successfully");
+    }
+    catch (Exception ex)
+    {
+        Debug.LogError($"Error in Save(): {ex.Message}");
+    }
+}
+
 }

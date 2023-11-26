@@ -10,6 +10,11 @@ public class BuildManager : MonoBehaviour
     public GameObject sellEffect;
 
     private TurretBluePrint turretToBuild;
+
+    public int _turretToBuild
+    {
+        get => turretToBuild.cost;
+    }
     private Node selectedNode;
 
     public NodeUI nodeUI;
